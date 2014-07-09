@@ -1,0 +1,61 @@
+Anaconda Python Distribution (Free, including commercial use)
+http://continuum.io/downloads
+
+Anaconda-1.9.2-Linux-x86.sh Linux 32-bit
+$ bash Anaconda-1.9.2-Linux-x86.sh
+
+###################################################################
+Building cartopy from source:
+
+dependencies: 
+        cython - 0.15.1
+        proj.4 - 4.7 (4.8 for more projection definitions)
+        geos - 3.3.4
+        python2 - 2.7.3
+        shapely - 1.2.14
+        scipy - 0.10.0
+        pyshp - 1.1.4
+        matplotlib - 1.2.0rc2
+        pep8 - 1.3.3 (for testing)
+        nose - 1.2.1 (for testing)
+
+Step 1.  Download the conda recipes from the IOOS github site
+$ git clone https://github.com/ioos/conda-recipes.git
+
+Step 2.   Build conda packages for the dependencies in Cartopy that
+are not already in Anaconda
+$ cd conda-recipes
+$ conda build proj4
+$ conda build pyshp
+
+Step 3. Build Cartopy
+$ conda build cartopy
+
+Step 4. Be a good citizen and share with others
+Upload your conda 32-bit linux packages to binstar.org.  Conda build
+tells you the upload commands after every successful build.  Create a
+free binstar account by going to binstar.org, wait for it to be
+approved, and then upload your conda packages.
+Use the '--personal' flag to denote that you are not the official
+package distributor, but just a personal distributor.
+
+$ binstar upload /home/sysadmin/anaconda/conda-bld/linux-32/cartopy-0.10.0-py27_0.tar.bz2 --personal
+
+also upload dependencies
+binstar upload /home/sysadmin/anaconda/conda-bld/linux-32/proj4-4.8.0-0.tar.bz2 --personal
+binstar upload /home/sysadmin/anaconda/conda-bld/linux-32/pyshp-1.2.0-py27_0.tar.bz2 --personal
+
+
+####################################################################
+Step 5. Install cartopy binaries
+If you called your binstar account "vsheremet" then folks on 32-bit
+Linux would just be able to install Cartopy by typing
+
+#$conda install -c vsheremet cartopy
+$ conda install -c https://conda.binstar.org/vsheremet cartopy
+Rich Signell built 64bit version which can be installed from binstar.org
+$ conda install -c https://conda.binstar.org/rsignell cartopy
+
+
+
+ 
